@@ -1,4 +1,4 @@
-﻿namespace EcoTracker.Domain.Enums
+﻿namespace EcoTracker.Domain.Enum
 {
     public enum Roles
     {

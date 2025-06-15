@@ -1,6 +1,6 @@
 ﻿
 using EcoTracker.Core.Infrastructure;
-using EcoTracker.Domain.Enums;
+using EcoTracker.Domain.Enum;
 
 namespace EcoTracker.Domain.Entities
 {

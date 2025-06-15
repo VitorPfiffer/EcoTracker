@@ -1,4 +1,4 @@
-﻿using EcoTracker.Domain.Enums;
+﻿using EcoTracker.Domain.Enum;
 
 namespace EcoTracker.Application.ViewModels
 {

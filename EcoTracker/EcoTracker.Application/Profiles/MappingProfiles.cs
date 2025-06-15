@@ -12,6 +12,10 @@ namespace EcoTracker.Application.Profiles
             CreateMap<UpdateUserViewModel, User>().ReverseMap();
             CreateMap<UserViewModel, User>().ReverseMap();
 
+
+            CreateMap<AddWasteDisposalViewModel, WasteDisposal>().ReverseMap();
+            CreateMap<UpdateWasteDisposalViewModel, WasteDisposal>().ReverseMap();
+            CreateMap<WasteDisposalViewModel, WasteDisposal>().ReverseMap();
         }
     }
 }
