@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.API", "EcoTracker\EcoTracker.API\EcoTracker.API.csproj", "{4CC2EF63-F110-4F28-BCD9-E801001DCCEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.Application", "EcoTracker\EcoTracker.Application\EcoTracker.Application.csproj", "{3D7950EF-B79D-45A7-AE03-21597378FF3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.Core", "EcoTracker\EcoTracker.Core\EcoTracker.Core.csproj", "{7DA7F944-BFB1-4FB1-BA08-DEFA6BB7007E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.Domain", "EcoTracker\EcoTracker.Domain\EcoTracker.Domain.csproj", "{EB6B4DF7-7B0E-4388-BD63-CEFDED153F49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.Infrastructure", "EcoTracker\EcoTracker.Infrastructure\EcoTracker.Infrastructure.csproj", "{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CC2EF63-F110-4F28-BCD9-E801001DCCEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CC2EF63-F110-4F28-BCD9-E801001DCCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CC2EF63-F110-4F28-BCD9-E801001DCCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CC2EF63-F110-4F28-BCD9-E801001DCCEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7950EF-B79D-45A7-AE03-21597378FF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7950EF-B79D-45A7-AE03-21597378FF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7950EF-B79D-45A7-AE03-21597378FF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7950EF-B79D-45A7-AE03-21597378FF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DA7F944-BFB1-4FB1-BA08-DEFA6BB7007E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DA7F944-BFB1-4FB1-BA08-DEFA6BB7007E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DA7F944-BFB1-4FB1-BA08-DEFA6BB7007E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DA7F944-BFB1-4FB1-BA08-DEFA6BB7007E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB6B4DF7-7B0E-4388-BD63-CEFDED153F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB6B4DF7-7B0E-4388-BD63-CEFDED153F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB6B4DF7-7B0E-4388-BD63-CEFDED153F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB6B4DF7-7B0E-4388-BD63-CEFDED153F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97E2E9DB-1FF0-4785-8BB5-9FDBB8E44B4F}
+	EndGlobalSection
+EndGlobal

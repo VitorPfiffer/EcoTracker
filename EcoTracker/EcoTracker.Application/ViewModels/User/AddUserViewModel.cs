@@ -1,0 +1,16 @@
+﻿using EcoTracker.Domain.Enums;
+
+namespace EcoTracker.Application.ViewModels
+{
+    public class AddUserViewModel
+    {
+        public required string Email { get; set; }
+
+        public required string Username { get; set; }
+
+        public required string Password { get; set; }
+
+        public required Roles Role { get; set; }
+
+    }
+}
