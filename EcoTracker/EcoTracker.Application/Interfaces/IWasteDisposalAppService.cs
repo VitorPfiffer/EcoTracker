@@ -1,4 +1,5 @@
 ﻿using EcoTracker.Application.ViewModels;
+using EcoTracker.Application.ViewModels.WasteDisposal;
 using EcoTracker.Core.Api.Pagination;
 
 namespace EcoTracker.Application.Interfaces
@@ -11,6 +12,6 @@ namespace EcoTracker.Application.Interfaces
         Task DeleteAsync(Guid Id);
         Task UpdateAsync(Guid id, UpdateWasteDisposalViewModel model);
         Task<IEnumerable<WasteDisposalViewModel>> GetPagedAsync(PagedQuery queryParameters);
-
+        Task<MonthlyWasteReportViewModel> GetTotalWasteByMonthAsync(int year, int month);
     }
 }

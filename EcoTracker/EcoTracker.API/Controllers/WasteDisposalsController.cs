@@ -1,5 +1,6 @@
 ﻿using EcoTracker.Application.Interfaces;
 using EcoTracker.Application.ViewModels;
+using EcoTracker.Application.ViewModels.WasteDisposal;
 using EcoTracker.Core.Api.Pagination;
 using EcoTracker.Core.Attributes;
 using EcoTracker.Core.Controller;
@@ -34,5 +35,9 @@ namespace EcoTracker.API.Controllers
         [HttpGet("user/{userId}")]
         [Authorize]
         public async Task<WasteDisposalViewModel?> GetByUserIdAsync(Guid userId) => await WasteDisposalServiceApp.GetByUserIdAsync(userId);
+
+        [HttpGet("monthly")]
+        [Authorize]
+        public async Task<MonthlyWasteReportViewModel> GetTotalWasteByMonthAsync(int year, int month) => await WasteDisposalServiceApp.GetTotalWasteByMonthAsync(year, month);
     }
 }

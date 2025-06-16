@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EcoTracker.Application.Interfaces;
 using EcoTracker.Application.ViewModels;
+using EcoTracker.Application.ViewModels.WasteDisposal;
 using EcoTracker.Core.Api.Pagination;
 using EcoTracker.Core.Application;
 using EcoTracker.Core.NotificationManager;
@@ -8,6 +9,7 @@ using EcoTracker.Domain.Entities;
 using EcoTracker.Domain.Interfaces.Services;
 using EcoTracker.Domain.Interfaces.UnitOfWork;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace EcoTracker.Application.Services
 {
@@ -89,6 +91,38 @@ namespace EcoTracker.Application.Services
         {
             var WasteDisposalList = await _wasteDisposalDomainService.GetPagedAsync(queryParameters);
             return _mapper.Map<IEnumerable<WasteDisposalViewModel>>(WasteDisposalList);
+        }
+
+        public async Task<MonthlyWasteReportViewModel> GetTotalWasteByMonthAsync(int year, int month)
+        {
+            var allWaste = await _wasteDisposalDomainService.GetByMonthAsync(year, month);
+
+            if (!allWaste.Any())
+            {
+                return new MonthlyWasteReportViewModel
+                {
+                    Month = new CultureInfo("pt-BR").DateTimeFormat.GetMonthName(month),
+                    Year = year,
+                    WasteTypes = []
+                };
+            }
+
+            var wasteByType = allWaste
+                .GroupBy(w => w.WasteType)
+                .Select(g => new WasteTypeTotal
+                {
+                    Type = g.Key,
+                    TotalKg = g.Sum(w => w.Quantity)
+                })
+                .OrderByDescending(x => x.TotalKg)
+                .ToList();
+
+            return new MonthlyWasteReportViewModel
+            {
+                Month = new CultureInfo("pt-BR").DateTimeFormat.GetMonthName(month),
+                Year = year,
+                WasteTypes = wasteByType
+            };
         }
     }
 }

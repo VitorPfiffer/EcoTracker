@@ -25,5 +25,13 @@ namespace EcoTracker.Infrastructure.Repositories
         {
             return await DbSet.Include(x => x.User).ToListAsync();
         }
+
+        public async Task<IEnumerable<WasteDisposal>> GetByMonthAsync(int year, int month)
+        {
+            return await DbSet.Where(w => w.Date.Year == year &&
+                           w.Date.Month == month)
+                .ToListAsync();
+
+        }
     }
 }

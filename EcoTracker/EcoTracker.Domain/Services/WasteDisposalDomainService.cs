@@ -11,11 +11,11 @@ namespace EcoTracker.Domain.Services
 {
     public sealed class WasteDisposalDomainService : DomainService, IWasteDisposalDomainService
     {
-        private readonly IWasteDisposalRepository _WasteDisposalRepository;
+        private readonly IWasteDisposalRepository _wasteDisposalRepository;
 
         public WasteDisposalDomainService(INotificationManager notificationManager, IValidatorManager validationManager, IWasteDisposalRepository WasteDisposalRepository) : base(notificationManager, validationManager)
         {
-            _WasteDisposalRepository = WasteDisposalRepository;
+            _wasteDisposalRepository = WasteDisposalRepository;
         }
 
         public async Task AddAsync(WasteDisposal entity)
@@ -24,17 +24,17 @@ namespace EcoTracker.Domain.Services
 
             if (!isValid)
                 return;
-            await _WasteDisposalRepository.AddAsync(entity);
+            await _wasteDisposalRepository.AddAsync(entity);
         }
 
         public async Task DeleteAsync(WasteDisposal entity)
         {
-            await _WasteDisposalRepository.DeleteAsync(entity);
+            await _wasteDisposalRepository.DeleteAsync(entity);
         }
 
         public async Task<WasteDisposal?> GetByUserIdAsync(Guid userId, bool includeDeleted = false)
         {
-            var WasteDisposal = await _WasteDisposalRepository.GetByUserIdAsync(userId, includeDeleted);
+            var WasteDisposal = await _wasteDisposalRepository.GetByUserIdAsync(userId, includeDeleted);
             if (WasteDisposal == null)
                 NotifyError("WasteDisposal_not_found");
 
@@ -43,7 +43,7 @@ namespace EcoTracker.Domain.Services
 
         public async Task<WasteDisposal?> GetByIdAsync(Guid id, bool includeDeleted = false)
         {
-            var WasteDisposal = await _WasteDisposalRepository.GetByIdAsync(id, includeDeleted);
+            var WasteDisposal = await _wasteDisposalRepository.GetByIdAsync(id, includeDeleted);
             if (WasteDisposal == null)
                 NotifyError("WasteDisposal_not_found");
 
@@ -56,17 +56,22 @@ namespace EcoTracker.Domain.Services
 
             if (!isValid)
                 return;
-            await _WasteDisposalRepository.UpdateAsync(entity);
+            await _wasteDisposalRepository.UpdateAsync(entity);
         }
         public async Task<IEnumerable<WasteDisposal>> GetPagedAsync(PagedQuery queryParameters)
         {
-            return await _WasteDisposalRepository.GetPagedAsync(queryParameters);
+            return await _wasteDisposalRepository.GetPagedAsync(queryParameters);
         }
 
 
         public async Task<IEnumerable<WasteDisposal>> GetAllAsync()
         {
-            return await _WasteDisposalRepository.GetAllAsync();
+            return await _wasteDisposalRepository.GetAllAsync();
+        }
+
+        public async Task<IEnumerable<WasteDisposal>> GetByMonthAsync(int year, int month)
+        {
+            return await _wasteDisposalRepository.GetByMonthAsync(year, month);
         }
     }
 }
