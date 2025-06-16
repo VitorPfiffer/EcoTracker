@@ -22,6 +22,13 @@ namespace EcoTracker.Application.Profiles
             CreateMap<PickUpScheduleViewModel, PickUpSchedule>().ReverseMap();
 
             CreateMap<User, User>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<PickUpSchedule, PickUpSchedule>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<WasteDisposal, WasteDisposal>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) =>
+                    srcMember != null &&
+                    !(srcMember is Guid guid && guid == Guid.Empty) &&
+                    !(srcMember is DateTime dt && dt == DateTime.MinValue)));
         }
     }
 }

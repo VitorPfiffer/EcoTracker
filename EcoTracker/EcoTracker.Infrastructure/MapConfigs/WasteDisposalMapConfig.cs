@@ -15,7 +15,7 @@ namespace EcoTracker.Infrastructure.MapConfigs
             builder.Property(x => x.WasteType).IsRequired();
             builder.Property(x => x.Quantity).IsRequired();
             builder.Property(x => x.Unit).IsRequired();
-            builder.Property(x => x.Date).IsRequired();
+            builder.Property(x => x.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
             builder.Property(x => x.UserId).IsRequired();
 
 

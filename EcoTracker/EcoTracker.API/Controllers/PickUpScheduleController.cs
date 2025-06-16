@@ -23,7 +23,7 @@ namespace EcoTracker.API.Controllers
         [Authorize]
         public async Task UpdateAsync(Guid id, [FromBody] UpdatePickUpScheduleViewModel model) => await PickUpScheduleServiceApp.UpdateAsync(id, model);
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         [Authorize]
         public async Task DeleteAsync(Guid id) => await PickUpScheduleServiceApp.DeleteAsync(id);
 

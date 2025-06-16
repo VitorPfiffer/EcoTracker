@@ -58,11 +58,18 @@ namespace EcoTracker.Application.Services
 
         public async Task UpdateAsync(Guid id, UpdateWasteDisposalViewModel model)
         {
-            var WasteDisposal = _mapper.Map<WasteDisposal>(model);
-            WasteDisposal.SetId(id);
 
+            var wasteDisposalDb = await _wasteDisposalDomainService.GetByIdAsync(id);
 
-            await _wasteDisposalDomainService.UpdateAsync(WasteDisposal);
+            if (wasteDisposalDb == null)
+                return;
+
+            var wasteDisposal = _mapper.Map<WasteDisposal>(model);
+            wasteDisposal.SetId(id);
+
+            wasteDisposal = _mapper.Map(wasteDisposal, wasteDisposalDb);
+
+            await _wasteDisposalDomainService.UpdateAsync(wasteDisposal);
 
             await _unitOfWork.CommitAsync();
 
