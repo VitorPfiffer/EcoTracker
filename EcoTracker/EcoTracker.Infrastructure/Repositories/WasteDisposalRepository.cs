@@ -20,5 +20,10 @@ namespace EcoTracker.Infrastructure.Repositories
             return await DbSet
                 .FirstOrDefaultAsync(x => x.UserId == userId);
         }
+
+        public async Task<IEnumerable<WasteDisposal>> GetAllAsync()
+        {
+            return await DbSet.Include(x => x.User).ToListAsync();
+        }
     }
 }

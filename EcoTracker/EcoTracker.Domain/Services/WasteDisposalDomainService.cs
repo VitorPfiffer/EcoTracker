@@ -54,5 +54,11 @@ namespace EcoTracker.Domain.Services
         {
             return await _WasteDisposalRepository.GetPagedAsync(queryParameters);
         }
+
+
+        public async Task<IEnumerable<WasteDisposal>> GetAllAsync()
+        {
+            return await _WasteDisposalRepository.GetAllAsync();
+        }
     }
 }

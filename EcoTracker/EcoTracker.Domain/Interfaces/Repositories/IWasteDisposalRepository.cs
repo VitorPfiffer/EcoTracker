@@ -11,5 +11,6 @@ namespace EcoTracker.Domain.Interfaces.Repositories
         Task UpdateAsync(WasteDisposal entity);
         Task DeleteAsync(WasteDisposal entity);
         Task<IEnumerable<WasteDisposal>> GetPagedAsync(PagedQuery queryParameters);
+        Task<IEnumerable<WasteDisposal>> GetAllAsync();
     }
 }
