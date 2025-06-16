@@ -12,18 +12,21 @@ namespace EcoTracker.Application.Services
 {
     public class WasteDisposalServiceApp : ApplicationService, IWasteDisposalServiceApp
     {
-        private readonly IWasteDisposalDomainService _WasteDisposalDomainService;
+        private readonly IWasteDisposalDomainService _wasteDisposalDomainService;
+        private readonly IUserDomainService _userDomainService;
+
         private readonly IEcoTrackerUnitOfWork _unitOfWork;
 
-        public WasteDisposalServiceApp(INotificationManager notificationManager, IMapper mapper, IWasteDisposalDomainService WasteDisposalDomainService, IEcoTrackerUnitOfWork unitOfWork) : base(notificationManager, mapper)
+        public WasteDisposalServiceApp(INotificationManager notificationManager, IMapper mapper, IWasteDisposalDomainService WasteDisposalDomainService, IEcoTrackerUnitOfWork unitOfWork, IUserDomainService userDomainService) : base(notificationManager, mapper)
         {
-            _WasteDisposalDomainService = WasteDisposalDomainService;
+            _wasteDisposalDomainService = WasteDisposalDomainService;
             _unitOfWork = unitOfWork;
+            _userDomainService = userDomainService;
         }
 
         public async Task<WasteDisposalViewModel?> GetByIdAsync(Guid id)
         {
-            var WasteDisposal = await _WasteDisposalDomainService.GetByIdAsync(id);
+            var WasteDisposal = await _wasteDisposalDomainService.GetByIdAsync(id);
 
             var viewModel = _mapper.Map<WasteDisposalViewModel>(WasteDisposal);
 
@@ -32,9 +35,14 @@ namespace EcoTracker.Application.Services
 
         public async Task AddAsync(AddWasteDisposalViewModel model)
         {
-            var WasteDisposal = _mapper.Map<WasteDisposal>(model);
+            var wasteDisposal = _mapper.Map<WasteDisposal>(model);
 
-            await _WasteDisposalDomainService.AddAsync(WasteDisposal);
+            var user = await _userDomainService.GetByIdAsync(model.UserId);
+
+            if (user == null)
+                return;
+
+            await _wasteDisposalDomainService.AddAsync(wasteDisposal);
 
             await _unitOfWork.CommitAsync();
         }
@@ -44,19 +52,26 @@ namespace EcoTracker.Application.Services
             var WasteDisposal = _mapper.Map<WasteDisposal>(model);
             WasteDisposal.SetId(id);
 
-            await _WasteDisposalDomainService.UpdateAsync(WasteDisposal);
+
+            await _wasteDisposalDomainService.UpdateAsync(WasteDisposal);
+
+            await _unitOfWork.CommitAsync();
+
         }
         public async Task DeleteAsync(Guid Id)
         {
-            var WasteDisposal = await _WasteDisposalDomainService.GetByIdAsync(Id);
+            var WasteDisposal = await _wasteDisposalDomainService.GetByIdAsync(Id);
 
             if (WasteDisposal == null) return;
-            await _WasteDisposalDomainService.DeleteAsync(WasteDisposal);
+            await _wasteDisposalDomainService.DeleteAsync(WasteDisposal);
+
+            await _unitOfWork.CommitAsync();
+
 
         }
         public async Task<IEnumerable<WasteDisposalViewModel>> GetPagedAsync(PagedQuery queryParameters)
         {
-            var WasteDisposalList = await _WasteDisposalDomainService.GetPagedAsync(queryParameters);
+            var WasteDisposalList = await _wasteDisposalDomainService.GetPagedAsync(queryParameters);
 
             return _mapper.Map<IEnumerable<WasteDisposalViewModel>>(WasteDisposalList);
         }

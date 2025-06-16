@@ -12,53 +12,60 @@ namespace EcoTracker.Application.Services
 {
     public class PickUpScheduleServiceApp : ApplicationService, IPickUpScheduleServiceApp
     {
-        private readonly IPickUpScheduleDomainService _PickUpScheduleDomainService;
+        private readonly IPickUpScheduleDomainService _pickUpScheduleDomainService;
+        private readonly IUserDomainService _userDomainService;
+
         private readonly IEcoTrackerUnitOfWork _unitOfWork;
 
-        public PickUpScheduleServiceApp(INotificationManager notificationManager, IMapper mapper, IPickUpScheduleDomainService PickUpScheduleDomainService, IEcoTrackerUnitOfWork unitOfWork) : base(notificationManager, mapper)
+        public PickUpScheduleServiceApp(INotificationManager notificationManager, IMapper mapper, IPickUpScheduleDomainService PickUpScheduleDomainService, IEcoTrackerUnitOfWork unitOfWork, IUserDomainService userDomainService) : base(notificationManager, mapper)
         {
-            _PickUpScheduleDomainService = PickUpScheduleDomainService;
+            _pickUpScheduleDomainService = PickUpScheduleDomainService;
             _unitOfWork = unitOfWork;
+            _userDomainService = userDomainService;
         }
 
         public async Task<PickUpScheduleViewModel?> GetByIdAsync(Guid id)
         {
-            var PickUpSchedule = await _PickUpScheduleDomainService.GetByIdAsync(id);
+            var pickUpSchedule = await _pickUpScheduleDomainService.GetByIdAsync(id);
 
-            var viewModel = _mapper.Map<PickUpScheduleViewModel>(PickUpSchedule);
+            var viewModel = _mapper.Map<PickUpScheduleViewModel>(pickUpSchedule);
 
             return viewModel;
         }
 
         public async Task AddAsync(AddPickUpScheduleViewModel model)
         {
-            var PickUpSchedule = _mapper.Map<PickUpSchedule>(model);
+            var pickUpSchedule = _mapper.Map<PickUpSchedule>(model);
 
-            await _PickUpScheduleDomainService.AddAsync(PickUpSchedule);
+            await _pickUpScheduleDomainService.AddAsync(pickUpSchedule);
 
             await _unitOfWork.CommitAsync();
         }
 
         public async Task UpdateAsync(Guid id, UpdatePickUpScheduleViewModel model)
         {
-            var PickUpSchedule = _mapper.Map<PickUpSchedule>(model);
-            PickUpSchedule.SetId(id);
+            var pickUpSchedule = _mapper.Map<PickUpSchedule>(model);
+            pickUpSchedule.SetId(id);
 
-            await _PickUpScheduleDomainService.UpdateAsync(PickUpSchedule);
+            await _pickUpScheduleDomainService.UpdateAsync(pickUpSchedule);
+
+            await _unitOfWork.CommitAsync();
         }
         public async Task DeleteAsync(Guid Id)
         {
-            var PickUpSchedule = await _PickUpScheduleDomainService.GetByIdAsync(Id);
+            var pickUpSchedule = await _pickUpScheduleDomainService.GetByIdAsync(Id);
 
-            if (PickUpSchedule == null) return;
-            await _PickUpScheduleDomainService.DeleteAsync(PickUpSchedule);
+            if (pickUpSchedule == null) return;
+            await _pickUpScheduleDomainService.DeleteAsync(pickUpSchedule);
+
+            await _unitOfWork.CommitAsync();
 
         }
         public async Task<IEnumerable<PickUpScheduleViewModel>> GetPagedAsync(PagedQuery queryParameters)
         {
-            var PickUpScheduleList = await _PickUpScheduleDomainService.GetPagedAsync(queryParameters);
+            var pickUpScheduleList = await _pickUpScheduleDomainService.GetPagedAsync(queryParameters);
 
-            return _mapper.Map<IEnumerable<PickUpScheduleViewModel>>(PickUpScheduleList);
+            return _mapper.Map<IEnumerable<PickUpScheduleViewModel>>(pickUpScheduleList);
         }
     }
 }

@@ -106,11 +106,29 @@ namespace EcoTracker.API.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agendamento não encontrado..
+        /// </summary>
+        public static string PickUpSchedule_not_found {
+            get {
+                return ResourceManager.GetString("PickUpSchedule_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Usuário não encontrado..
         /// </summary>
         public static string user_not_found {
             get {
                 return ResourceManager.GetString("user_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Descarte de resíduos não encontrado..
+        /// </summary>
+        public static string WasteDisposal_not_found {
+            get {
+                return ResourceManager.GetString("WasteDisposal_not_found", resourceCulture);
             }
         }
     }

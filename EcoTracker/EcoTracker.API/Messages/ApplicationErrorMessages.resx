@@ -135,4 +135,10 @@
   <data name="user_not_found" xml:space="preserve">
     <value>Usuário não encontrado.</value>
   </data>
+  <data name="WasteDisposal_not_found" xml:space="preserve">
+    <value>Descarte de resíduos não encontrado.</value>
+  </data>
+  <data name="PickUpSchedule_not_found" xml:space="preserve">
+    <value>Agendamento não encontrado.</value>
+  </data>
 </root>
