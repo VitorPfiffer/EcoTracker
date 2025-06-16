@@ -2,6 +2,7 @@
 {
     public class PickUpScheduleViewModel
     {
+        public Guid Id { get; set; }
         public required string Street { get; set; }
         public required string Number { get; set; }
         public required string Neighborhood { get; set; }
