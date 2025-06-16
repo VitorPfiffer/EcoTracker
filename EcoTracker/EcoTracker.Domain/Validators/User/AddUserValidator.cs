@@ -1,20 +1,23 @@
 ﻿using EcoTracker.Domain.Entities;
+using EcoTracker.Domain.Interfaces.Repositories;
+using EcoTracker.Domain.Validators.Extensions;
 using FluentValidation;
 
 namespace EcoTracker.Domain.Validators
 {
     public class AddUserValidator : AbstractValidator<User>
     {
-        public AddUserValidator()
+        public AddUserValidator(IUserRepository userRepository)
         {
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("E-mail é obrigatório.")
-                .EmailAddress().WithMessage("Formato de e-mail inválido.");
+                .EmailAddress().WithMessage("Formato de e-mail inválido.")
+                .UniqueEmail(userRepository);
 
             RuleFor(x => x.Username)
                 .NotEmpty().WithMessage("Nome de usuário é obrigatório.")
-                .MinimumLength(3).WithMessage("O nome de usuário deve ter pelo menos 3 caracteres.");
-
+                .MinimumLength(3).WithMessage("O nome de usuário deve ter pelo menos 3 caracteres.")
+                .UniqueUsername(userRepository);
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("Senha é obrigatória.")
                 .MinimumLength(6).WithMessage("A senha deve ter pelo menos 6 caracteres.");

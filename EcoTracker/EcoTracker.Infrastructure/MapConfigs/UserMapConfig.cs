@@ -15,6 +15,9 @@ namespace EcoTracker.Infrastructure.MapConfigs
             builder.Property(x => x.Username).IsRequired();
             builder.Property(x => x.Password).IsRequired();
             builder.Property(x => x.Role).IsRequired();
+
+            builder.HasIndex(x => x.Username).IsUnique();
+            builder.HasIndex(x => x.Email).IsUnique();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.API", "EcoTracker\EcoTracker.API\EcoTracker.API.csproj", "{4CC2EF63-F110-4F28-BCD9-E801001DCCEF}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.Domain", "EcoTracker\EcoTracker.Domain\EcoTracker.Domain.csproj", "{EB6B4DF7-7B0E-4388-BD63-CEFDED153F49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.Infrastructure", "EcoTracker\EcoTracker.Infrastructure\EcoTracker.Infrastructure.csproj", "{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoTracker.Tests", "EcoTracker.Tests\EcoTracker.Tests.csproj", "{DE2236D6-13E6-4643-9E65-ECF3D2891738}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7000C234-0B88-4DA3-BC73-B5DDD9AC3F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE2236D6-13E6-4643-9E65-ECF3D2891738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE2236D6-13E6-4643-9E65-ECF3D2891738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE2236D6-13E6-4643-9E65-ECF3D2891738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE2236D6-13E6-4643-9E65-ECF3D2891738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
