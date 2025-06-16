@@ -1,6 +1,8 @@
 ﻿using EcoTracker.Core.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace EcoTracker.Core.Api.ActionFilters
 {
@@ -13,9 +15,13 @@ namespace EcoTracker.Core.Api.ActionFilters
             if (environment == "Development" || environment == "Local")
                 throw context.Exception;
 
-            logger.LogError(context.Exception, context.Exception?.InnerException.Message);
+            logger.LogError(context.Exception, context.Exception?.InnerException?.Message);
 
             apiResponse.HasUnhandledException = true;
+
+            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            context.Result = new ObjectResult(apiResponse);
         }
     }
 }
