@@ -20,6 +20,8 @@ namespace EcoTracker.Application.Profiles
             CreateMap<AddPickUpScheduleViewModel, PickUpSchedule>().ReverseMap();
             CreateMap<UpdatePickUpScheduleViewModel, PickUpSchedule>().ReverseMap();
             CreateMap<PickUpScheduleViewModel, PickUpSchedule>().ReverseMap();
+
+            CreateMap<User, User>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 }

@@ -63,6 +63,8 @@ namespace EcoTracker.Application.Services
             var user = _mapper.Map<User>(model);
             user.SetId(id);
 
+            user = _mapper.Map(user, userDb);
+
             await _userDomainService.UpdateAsync(user);
 
             await _unitOfWork.CommitAsync();
