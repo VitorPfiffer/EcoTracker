@@ -12,8 +12,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace EcoTracker.Infrastructure.Migrations
 {
     [DbContext(typeof(EcoTrackerContext))]
-    [Migration("20250615224505_addWasteDisposals")]
-    partial class addWasteDisposals
+    [Migration("20250616175512_initialCreation")]
+    partial class initialCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,66 @@ namespace EcoTracker.Infrastructure.Migrations
 
             OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EcoTracker.Domain.Entities.PickUpSchedule", b =>
+                {
+                    b.Property<byte[]>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("RAW(900)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TIMESTAMP(7)")
+                        .HasDefaultValue(new DateTime(2025, 6, 16, 17, 55, 9, 625, DateTimeKind.Utc).AddTicks(8084));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<int>("IsDeleted")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<string>("Neighborhood")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTime>("ScheduledDate")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TIMESTAMP(7)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("WasteType")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PickUpSchedules", (string)null);
+                });
+
             modelBuilder.Entity("EcoTracker.Domain.Entities.User", b =>
                 {
                     b.Property<byte[]>("Id")
@@ -34,7 +94,7 @@ namespace EcoTracker.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValue(new DateTime(2025, 6, 15, 22, 45, 5, 228, DateTimeKind.Utc).AddTicks(7932));
+                        .HasDefaultValue(new DateTime(2025, 6, 16, 17, 55, 9, 627, DateTimeKind.Utc).AddTicks(1910));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -42,7 +102,7 @@ namespace EcoTracker.Infrastructure.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("NVARCHAR2(450)");
 
                     b.Property<int>("IsDeleted")
                         .HasColumnType("NUMBER(1)");
@@ -62,9 +122,15 @@ namespace EcoTracker.Infrastructure.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("NVARCHAR2(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Users", (string)null);
                 });
@@ -78,14 +144,16 @@ namespace EcoTracker.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValue(new DateTime(2025, 6, 15, 22, 45, 5, 230, DateTimeKind.Utc).AddTicks(8004));
+                        .HasDefaultValue(new DateTime(2025, 6, 16, 17, 55, 10, 434, DateTimeKind.Utc).AddTicks(1560));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TIMESTAMP(7)")
+                        .HasDefaultValue(new DateTime(2025, 6, 16, 17, 55, 11, 765, DateTimeKind.Utc).AddTicks(2226));
 
                     b.Property<int>("IsDeleted")
                         .HasColumnType("NUMBER(1)");

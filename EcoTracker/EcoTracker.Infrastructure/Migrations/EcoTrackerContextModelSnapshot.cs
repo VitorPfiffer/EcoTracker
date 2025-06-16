@@ -35,7 +35,7 @@ namespace EcoTracker.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValue(new DateTime(2025, 6, 15, 23, 0, 20, 88, DateTimeKind.Utc).AddTicks(5477));
+                        .HasDefaultValue(new DateTime(2025, 6, 16, 17, 55, 9, 625, DateTimeKind.Utc).AddTicks(8084));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -91,7 +91,7 @@ namespace EcoTracker.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValue(new DateTime(2025, 6, 15, 23, 0, 20, 89, DateTimeKind.Utc).AddTicks(5224));
+                        .HasDefaultValue(new DateTime(2025, 6, 16, 17, 55, 9, 627, DateTimeKind.Utc).AddTicks(1910));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -99,7 +99,7 @@ namespace EcoTracker.Infrastructure.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("NVARCHAR2(450)");
 
                     b.Property<int>("IsDeleted")
                         .HasColumnType("NUMBER(1)");
@@ -119,9 +119,15 @@ namespace EcoTracker.Infrastructure.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("NVARCHAR2(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Users", (string)null);
                 });
@@ -135,14 +141,16 @@ namespace EcoTracker.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValue(new DateTime(2025, 6, 15, 23, 0, 20, 91, DateTimeKind.Utc).AddTicks(5243));
+                        .HasDefaultValue(new DateTime(2025, 6, 16, 17, 55, 10, 434, DateTimeKind.Utc).AddTicks(1560));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TIMESTAMP(7)")
+                        .HasDefaultValue(new DateTime(2025, 6, 16, 17, 55, 11, 765, DateTimeKind.Utc).AddTicks(2226));
 
                     b.Property<int>("IsDeleted")
                         .HasColumnType("NUMBER(1)");
