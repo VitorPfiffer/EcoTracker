@@ -7,6 +7,7 @@ using EcoTracker.Core.NotificationManager;
 using EcoTracker.Domain.Entities;
 using EcoTracker.Domain.Interfaces.Services;
 using EcoTracker.Domain.Interfaces.UnitOfWork;
+using Microsoft.Extensions.Logging;
 
 namespace EcoTracker.Application.Services
 {
@@ -14,14 +15,15 @@ namespace EcoTracker.Application.Services
     {
         private readonly IWasteDisposalDomainService _wasteDisposalDomainService;
         private readonly IUserDomainService _userDomainService;
-
+        private readonly ILogger<WasteDisposalServiceApp> _logger;
         private readonly IEcoTrackerUnitOfWork _unitOfWork;
 
-        public WasteDisposalServiceApp(INotificationManager notificationManager, IMapper mapper, IWasteDisposalDomainService WasteDisposalDomainService, IEcoTrackerUnitOfWork unitOfWork, IUserDomainService userDomainService) : base(notificationManager, mapper)
+        public WasteDisposalServiceApp(INotificationManager notificationManager, IMapper mapper, IWasteDisposalDomainService WasteDisposalDomainService, IEcoTrackerUnitOfWork unitOfWork, IUserDomainService userDomainService, ILogger<WasteDisposalServiceApp> logger) : base(notificationManager, mapper)
         {
             _wasteDisposalDomainService = WasteDisposalDomainService;
             _unitOfWork = unitOfWork;
             _userDomainService = userDomainService;
+            _logger = logger;
         }
         public async Task<WasteDisposalViewModel?> GetByUserIdAsync(Guid userId)
         {
@@ -79,7 +81,6 @@ namespace EcoTracker.Application.Services
         public async Task<IEnumerable<WasteDisposalViewModel>> GetPagedAsync(PagedQuery queryParameters)
         {
             var WasteDisposalList = await _wasteDisposalDomainService.GetPagedAsync(queryParameters);
-
             return _mapper.Map<IEnumerable<WasteDisposalViewModel>>(WasteDisposalList);
         }
     }

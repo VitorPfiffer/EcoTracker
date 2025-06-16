@@ -35,9 +35,6 @@ services.AddMemoryCache();
 
 services.AddNotification("Messages.ApplicationErrorMessages");
 
-
-
-
 var app = builder.Build();
 
 app.UseSerilog();

@@ -13,15 +13,13 @@ namespace EcoTracker.Application.Services
     public class PickUpScheduleServiceApp : ApplicationService, IPickUpScheduleServiceApp
     {
         private readonly IPickUpScheduleDomainService _pickUpScheduleDomainService;
-        private readonly IUserDomainService _userDomainService;
 
         private readonly IEcoTrackerUnitOfWork _unitOfWork;
 
-        public PickUpScheduleServiceApp(INotificationManager notificationManager, IMapper mapper, IPickUpScheduleDomainService PickUpScheduleDomainService, IEcoTrackerUnitOfWork unitOfWork, IUserDomainService userDomainService) : base(notificationManager, mapper)
+        public PickUpScheduleServiceApp(INotificationManager notificationManager, IMapper mapper, IPickUpScheduleDomainService PickUpScheduleDomainService, IEcoTrackerUnitOfWork unitOfWork) : base(notificationManager, mapper)
         {
             _pickUpScheduleDomainService = PickUpScheduleDomainService;
             _unitOfWork = unitOfWork;
-            _userDomainService = userDomainService;
         }
 
         public async Task<PickUpScheduleViewModel?> GetByIdAsync(Guid id)
