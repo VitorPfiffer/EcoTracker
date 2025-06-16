@@ -1,10 +1,13 @@
-﻿using EcoTracker.Core.Data;
+﻿using EcoTracker.Core.Api.Attributes;
+using EcoTracker.Core.Data;
 using EcoTracker.Core.Enums;
 using EcoTracker.Core.NotificationManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
+using System.Reflection;
 
 namespace EcoTracker.Core.Api
 {
@@ -39,8 +42,14 @@ namespace EcoTracker.Core.Api
                 {
                 }
             }
+            var methodInfo = ((ControllerActionDescriptor)context.ActionDescriptor).MethodInfo;
+            var customResponseCodeAttribute = methodInfo.GetCustomAttribute<CustomResponseCode>();
 
-            if (apiResponse.Success)
+            if (customResponseCodeAttribute != null)
+            {
+                httpContext.Response.StatusCode = (int)customResponseCodeAttribute.ResponseCode;
+            }
+            else if (apiResponse.Success)
             {
                 switch (httpContext.Request.Method.ToUpper())
                 {

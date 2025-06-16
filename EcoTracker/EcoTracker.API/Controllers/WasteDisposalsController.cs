@@ -20,7 +20,7 @@ namespace EcoTracker.API.Controllers
         public async Task AddAsync([FromBody] AddWasteDisposalViewModel model) => await WasteDisposalServiceApp.AddAsync(model);
 
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task UpdateAsync(Guid id, [FromBody] UpdateWasteDisposalViewModel model) => await WasteDisposalServiceApp.UpdateAsync(id, model);
 
         [HttpDelete("{id}")]
@@ -28,6 +28,7 @@ namespace EcoTracker.API.Controllers
         public async Task DeleteAsync(Guid id) => await WasteDisposalServiceApp.DeleteAsync(id);
 
         [HttpGet]
+        [Authorize]
         public async Task<IEnumerable<WasteDisposalViewModel>> GetPagedAsync([FromQuery] PagedQuery queryParameters) => await WasteDisposalServiceApp.GetPagedAsync(queryParameters);
 
         [HttpGet("user/{userId}")]
