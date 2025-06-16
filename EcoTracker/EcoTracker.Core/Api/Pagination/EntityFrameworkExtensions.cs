@@ -79,7 +79,7 @@ namespace EcoTracker.Core.Api.Pagination
         {
             if (queryParameters == null || queryParameters.PageSize == 0 || queryParameters.Page == 0) throw new InvalidOperationException("Incorrect Pagination Query");
 
-            var itemsToSkip = queryParameters.Page == 1 ? 0 : queryParameters.PageSize * queryParameters.Page;
+            var itemsToSkip = (queryParameters.Page - 1) * queryParameters.PageSize;
 
             return query.Skip(itemsToSkip).Take(queryParameters.PageSize);
         }
