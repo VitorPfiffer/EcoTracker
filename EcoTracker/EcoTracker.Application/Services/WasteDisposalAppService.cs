@@ -23,7 +23,14 @@ namespace EcoTracker.Application.Services
             _unitOfWork = unitOfWork;
             _userDomainService = userDomainService;
         }
+        public async Task<WasteDisposalViewModel?> GetByUserIdAsync(Guid userId)
+        {
+            var WasteDisposal = await _wasteDisposalDomainService.GetByUserIdAsync(userId);
 
+            var viewModel = _mapper.Map<WasteDisposalViewModel>(WasteDisposal);
+
+            return viewModel;
+        }
         public async Task<WasteDisposalViewModel?> GetByIdAsync(Guid id)
         {
             var WasteDisposal = await _wasteDisposalDomainService.GetByIdAsync(id);

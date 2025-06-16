@@ -7,6 +7,7 @@ namespace EcoTracker.Application.Interfaces
     {
         Task AddAsync(AddWasteDisposalViewModel model);
         Task<WasteDisposalViewModel?> GetByIdAsync(Guid id);
+        Task<WasteDisposalViewModel?> GetByUserIdAsync(Guid userId);
         Task DeleteAsync(Guid Id);
         Task UpdateAsync(Guid id, UpdateWasteDisposalViewModel model);
         Task<IEnumerable<WasteDisposalViewModel>> GetPagedAsync(PagedQuery queryParameters);

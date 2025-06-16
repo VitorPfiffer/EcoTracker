@@ -24,5 +24,8 @@ namespace EcoTracker.API.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<WasteDisposalViewModel>> GetPagedAsync([FromQuery] PagedQuery queryParameters) => await WasteDisposalServiceApp.GetPagedAsync(queryParameters);
+
+        [HttpGet("user/{userId}")]
+        public async Task<WasteDisposalViewModel?> GetByUserIdAsync(Guid userId) => await WasteDisposalServiceApp.GetByUserIdAsync(userId);
     }
 }

@@ -28,6 +28,15 @@ namespace EcoTracker.Domain.Services
             await _WasteDisposalRepository.DeleteAsync(entity);
         }
 
+        public async Task<WasteDisposal?> GetByUserIdAsync(Guid userId, bool includeDeleted = false)
+        {
+            var WasteDisposal = await _WasteDisposalRepository.GetByUserIdAsync(userId, includeDeleted);
+            if (WasteDisposal == null)
+                NotifyError("WasteDisposal_not_found");
+
+            return WasteDisposal;
+        }
+
         public async Task<WasteDisposal?> GetByIdAsync(Guid id, bool includeDeleted = false)
         {
             var WasteDisposal = await _WasteDisposalRepository.GetByIdAsync(id, includeDeleted);

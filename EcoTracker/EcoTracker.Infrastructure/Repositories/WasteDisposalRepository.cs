@@ -14,5 +14,11 @@ namespace EcoTracker.Infrastructure.Repositories
             return await DbSet
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task<WasteDisposal?> GetByUserIdAsync(Guid userId, bool includeDeleted = false)
+        {
+            return await DbSet
+                .FirstOrDefaultAsync(x => x.UserId == userId);
+        }
     }
 }
