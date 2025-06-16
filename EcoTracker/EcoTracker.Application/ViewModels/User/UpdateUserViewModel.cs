@@ -9,8 +9,6 @@ namespace EcoTracker.Application.ViewModels
         public required string Username { get; set; }
 
         public required Roles Role { get; set; }
-
-
     }
 
 }

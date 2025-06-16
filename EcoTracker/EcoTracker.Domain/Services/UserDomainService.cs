@@ -5,6 +5,7 @@ using EcoTracker.Core.NotificationManager;
 using EcoTracker.Domain.Entities;
 using EcoTracker.Domain.Interfaces.Repositories;
 using EcoTracker.Domain.Interfaces.Services;
+using EcoTracker.Domain.Validators;
 
 namespace EcoTracker.Domain.Services
 {
@@ -19,6 +20,10 @@ namespace EcoTracker.Domain.Services
 
         public async Task AddAsync(User entity)
         {
+            var isValid = await _validatorManager.ValidateAsync<AddUserValidator>(entity);
+
+            if (!isValid)
+                return;
 
             await _userRepository.AddAsync(entity);
         }
@@ -50,6 +55,11 @@ namespace EcoTracker.Domain.Services
 
         public async Task UpdateAsync(User entity)
         {
+            var isValid = await _validatorManager.ValidateAsync<UpdateUserValidator>(entity);
+
+            if (!isValid)
+                return;
+
             await _userRepository.UpdateAsync(entity);
         }
         public async Task<IEnumerable<User>> GetPagedAsync(PagedQuery queryParameters)

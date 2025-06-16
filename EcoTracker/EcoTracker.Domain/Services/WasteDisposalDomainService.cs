@@ -5,6 +5,7 @@ using EcoTracker.Core.NotificationManager;
 using EcoTracker.Domain.Entities;
 using EcoTracker.Domain.Interfaces.Repositories;
 using EcoTracker.Domain.Interfaces.Services;
+using EcoTracker.Domain.Validators;
 
 namespace EcoTracker.Domain.Services
 {
@@ -19,7 +20,10 @@ namespace EcoTracker.Domain.Services
 
         public async Task AddAsync(WasteDisposal entity)
         {
+            var isValid = await _validatorManager.ValidateAsync<AddWasteDisposalValidator>(entity);
 
+            if (!isValid)
+                return;
             await _WasteDisposalRepository.AddAsync(entity);
         }
 
@@ -48,6 +52,10 @@ namespace EcoTracker.Domain.Services
 
         public async Task UpdateAsync(WasteDisposal entity)
         {
+            var isValid = await _validatorManager.ValidateAsync<UpdateWasteDisposalValidator>(entity);
+
+            if (!isValid)
+                return;
             await _WasteDisposalRepository.UpdateAsync(entity);
         }
         public async Task<IEnumerable<WasteDisposal>> GetPagedAsync(PagedQuery queryParameters)

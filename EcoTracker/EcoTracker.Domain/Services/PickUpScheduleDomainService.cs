@@ -5,6 +5,7 @@ using EcoTracker.Core.NotificationManager;
 using EcoTracker.Domain.Entities;
 using EcoTracker.Domain.Interfaces.Repositories;
 using EcoTracker.Domain.Interfaces.Services;
+using EcoTracker.Domain.Validators;
 
 namespace EcoTracker.Domain.Services
 {
@@ -19,7 +20,10 @@ namespace EcoTracker.Domain.Services
 
         public async Task AddAsync(PickUpSchedule entity)
         {
+            var isValid = await _validatorManager.ValidateAsync<AddPickUpScheduleValidator>(entity);
 
+            if (!isValid)
+                return;
             await _PickUpScheduleRepository.AddAsync(entity);
         }
 
@@ -39,6 +43,11 @@ namespace EcoTracker.Domain.Services
 
         public async Task UpdateAsync(PickUpSchedule entity)
         {
+            var isValid = await _validatorManager.ValidateAsync<UpdatePickUpScheduleValidator>(entity);
+
+            if (!isValid)
+                return;
+
             await _PickUpScheduleRepository.UpdateAsync(entity);
         }
         public async Task<IEnumerable<PickUpSchedule>> GetPagedAsync(PagedQuery queryParameters)

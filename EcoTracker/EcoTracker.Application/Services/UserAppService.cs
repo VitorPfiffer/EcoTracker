@@ -13,13 +13,11 @@ namespace EcoTracker.Application.Services
     public class UserAppService : ApplicationService, IUserAppService
     {
         private readonly IUserDomainService _userDomainService;
-        private readonly IAuthAppService _tokenAppService;
         private readonly IEcoTrackerUnitOfWork _unitOfWork;
 
-        public UserAppService(INotificationManager notificationManager, IMapper mapper, IUserDomainService userDomainService, IAuthAppService tokenAppService, IEcoTrackerUnitOfWork unitOfWork) : base(notificationManager, mapper)
+        public UserAppService(INotificationManager notificationManager, IMapper mapper, IUserDomainService userDomainService, IEcoTrackerUnitOfWork unitOfWork) : base(notificationManager, mapper)
         {
             _userDomainService = userDomainService;
-            _tokenAppService = tokenAppService;
             _unitOfWork = unitOfWork;
         }
 

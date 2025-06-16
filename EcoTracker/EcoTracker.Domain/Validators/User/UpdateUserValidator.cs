@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace EcoTracker.Domain.Validators
 {
-    public class AddUserValidator : AbstractValidator<User>
+    public class UpdateUserValidator : AbstractValidator<User>
     {
-        public AddUserValidator()
+        public UpdateUserValidator()
         {
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("E-mail é obrigatório.")
