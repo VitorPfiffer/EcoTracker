@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace EcoTracker.Core.Api.Pagination
@@ -11,7 +12,7 @@ namespace EcoTracker.Core.Api.Pagination
              { "," , Expression.And},
              { "|" , Expression.Or },
         };
-
+        private static readonly MethodInfo _stringContainsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) })!;
         private static readonly Dictionary<string, Func<Expression, Expression, Expression>> _operatorMap =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -19,6 +20,8 @@ namespace EcoTracker.Core.Api.Pagination
             { ">", Expression.GreaterThan },
             { "<", Expression.LessThan },
             { "!=", Expression.NotEqual },
+            { "~", (member, constant) =>
+            Expression.Call(member, _stringContainsMethod, constant) } //Basicamente um like,
         };
 
         public static Expression<Func<T, bool>> GetExpression<T>(string filter)
@@ -30,6 +33,14 @@ namespace EcoTracker.Core.Api.Pagination
             var fullFilterExpression = filter.Split(operatorConfig);
 
             var property = Expression.Property(parameter, fullFilterExpression[0].Trim());
+
+            var propertyType = property.Type;
+
+            if (operatorConfig.Equals("~") && propertyType != typeof(string))
+            {
+                throw new InvalidOperationException($"O operador '{operatorConfig}' só pode ser usado com propriedades do tipo string. Propriedade '{filter}' é do tipo '{propertyType.Name}'.");
+            }
+
             var value = Expression.Constant(Convert.ChangeType(fullFilterExpression[1].Trim(), property.Type));
 
             var comparison = _operatorMap[operatorConfig](property, value);
@@ -50,7 +61,34 @@ namespace EcoTracker.Core.Api.Pagination
 
             return Expression.Lambda<Func<T, bool>>(combinedBody, parameter);
         }
+        public static IQueryable<T> ApplyOrder<T>(this IQueryable<T> query, PagedQuery filters)
+        {
+            string propertyName = filters.OrderBy;
 
+
+            if (propertyName == null)
+                return query;
+
+            var propertyInfo = typeof(T).GetProperty(propertyName, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+            if (propertyInfo == null)
+                throw new ArgumentException($"A propriedade '{propertyName}' não existe no tipo '{typeof(T).Name}'.");
+
+
+            var parameter = Expression.Parameter(typeof(T), "x");
+            var property = Expression.PropertyOrField(parameter, propertyName);
+            var propertyType = property.Type;
+
+            var lambda = Expression.Lambda(property, parameter);
+
+            var methodName = "OrderBy";
+            var method = typeof(Queryable).GetMethods()
+                .First(m => m.Name == methodName
+                            && m.GetParameters().Length == 2)
+                .MakeGenericMethod(typeof(T), propertyType);
+
+            var result = method.Invoke(null, new object[] { query, lambda });
+            return (IQueryable<T>)result!;
+        }
         public static IQueryable<T> ApplyFilters<T>(this IQueryable<T> query, PagedQuery filters)
         {
             if (string.IsNullOrEmpty(filters.Filters)) return query;

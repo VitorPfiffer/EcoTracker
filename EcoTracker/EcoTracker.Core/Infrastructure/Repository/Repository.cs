@@ -102,6 +102,7 @@ namespace EcoTracker.Core.Infrastructure.Repository
         public virtual async Task<IEnumerable<TEntity>> GetPagedAsync(PagedQuery queryParameters)
         {
             return await DbSet
+                .ApplyOrder(queryParameters)
                 .ApplyFilters(queryParameters)
                 .ApplyPaging(queryParameters)
                 .ToListAsync();

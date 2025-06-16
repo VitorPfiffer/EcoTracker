@@ -14,7 +14,7 @@ namespace EcoTracker.API.Controllers
 
         [HttpGet("summary")]
         [Authorize]
-        public async Task<IEnumerable<LeaderboardViewModel>> GetSummaryAsync() => await leaderboardAppService.GetLeaderboardAsync();
+        public async Task<LeaderboardSummaryViewModel> GetSummaryAsync() => await leaderboardAppService.GetSummaryAsync();
 
     }
 }
