@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"vitao@gmail.com\",\r\n  \"username\": \"Vitão\",\r\n  \"password\": \"123456\",\r\n  \"role\": 0\r\n}",
+							"raw": "{\r\n  \"email\": \"vitão@gmail.com\",\r\n  \"username\": \"vitão\",\r\n  \"password\": \"123456\",\r\n  \"role\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,7 +67,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:32769/api/v1/users?Page=1&PageSize=10",
+							"raw": "https://localhost:32769/api/v1/users?Page=1&PageSize=10&Filters=email~d&OrderBy=username",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -88,14 +88,12 @@
 									"value": "10"
 								},
 								{
-									"key": "OrderBy",
-									"value": "email",
-									"disabled": true
+									"key": "Filters",
+									"value": "email~d"
 								},
 								{
-									"key": "Filters",
-									"value": "username=Vitão",
-									"disabled": true
+									"key": "OrderBy",
+									"value": "username"
 								}
 							]
 						}
@@ -139,7 +137,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:32769/api/v1/users/acea58c6-9dfa-4915-b787-28c9b4ba9f46",
+							"raw": "https://localhost:32769/api/v1/users/86ee6c1d-92b3-4f31-938a-2a69f373b949",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -149,7 +147,7 @@
 								"api",
 								"v1",
 								"users",
-								"acea58c6-9dfa-4915-b787-28c9b4ba9f46"
+								"86ee6c1d-92b3-4f31-938a-2a69f373b949"
 							]
 						}
 					},
@@ -250,7 +248,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"wasteType\": \"lixo\",\r\n    \"quantity\": 1,\r\n    \"unit\": \"kg\",\r\n    \"date\": \"2025-05-12T14:30:00\",\r\n    \"userId\": \"86ee6c1d-92b3-4f31-938a-2a69f373b949\"\r\n}",
+							"raw": "{\r\n    \"wasteType\": \"organico\",\r\n    \"quantity\": 3,\r\n    \"unit\": \"kg\",\r\n    \"date\": \"2025-05-12T14:30:00\",\r\n    \"userId\": \"af507245-61e2-4af6-a617-14dd4b4c10dd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -310,7 +308,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:32769/api/v1/waste-disposals?Page=1&PageSize=10",
+							"raw": "https://localhost:32769/api/v1/waste-disposals?Page=1&PageSize=10&OrderBy=quantity",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -329,6 +327,15 @@
 								{
 									"key": "PageSize",
 									"value": "10"
+								},
+								{
+									"key": "Filters",
+									"value": "wasteType=lixo",
+									"disabled": true
+								},
+								{
+									"key": "OrderBy",
+									"value": "quantity"
 								}
 							]
 						}
@@ -381,12 +388,12 @@
 					"response": []
 				},
 				{
-					"name": "Delete",
+					"name": "GetByMonth",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:32769/api/v1/waste-disposals/b1cc3744-f201-4a21-b064-2bb936dca5ac",
+							"raw": "https://localhost:32769/api/v1/waste-disposals/monthly?year=2025&month=5",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -396,7 +403,17 @@
 								"api",
 								"v1",
 								"waste-disposals",
-								"b1cc3744-f201-4a21-b064-2bb936dca5ac"
+								"monthly"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2025"
+								},
+								{
+									"key": "month",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -430,7 +447,7 @@
 			"name": "Leaderboard",
 			"item": [
 				{
-					"name": "GetAll",
+					"name": "Leaderboard",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -461,6 +478,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:32769/api/v1/leaderboard/summary",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "32769",
+							"path": [
+								"api",
+								"v1",
+								"leaderboard",
+								"summary"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -474,7 +513,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"street\": \"Rua Exemplo\",\r\n  \"number\": \"123\",\r\n  \"neighborhood\": \"Bairro Exemplo\",\r\n  \"city\": \"Cidade Exemplo\",\r\n  \"state\": \"SP\",\r\n  \"postalCode\": \"12345-678\",\r\n  \"wasteType\": \"Plástico\",\r\n  \"scheduledDate\": \"2025-10-12T14:30:00\"\r\n}",
+							"raw": "{\r\n  \"street\": \"Rua Exemplo\",\r\n  \"number\": \"123\",\r\n  \"neighborhood\": \"Bairro Exemplo\",\r\n  \"city\": \"Cidade Exemplo\",\r\n  \"state\": \"PR\",\r\n  \"postalCode\": \"12345-678\",\r\n  \"wasteType\": \"lixo\",\r\n  \"scheduledDate\": \"2025-10-12T14:30:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -504,7 +543,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:32769/api/v1/pickup-schedule?Page=2&PageSize=10",
+							"raw": "https://localhost:32769/api/v1/pickup-schedule?Page=2&PageSize=10&OrderBy=wasteType",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -523,6 +562,15 @@
 								{
 									"key": "PageSize",
 									"value": "10"
+								},
+								{
+									"key": "Filters",
+									"value": "state=SC",
+									"disabled": true
+								},
+								{
+									"key": "OrderBy",
+									"value": "wasteType"
 								}
 							]
 						}
