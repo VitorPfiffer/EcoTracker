@@ -1,8 +1,8 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: your-app-name  # seu Web App Linux
-  DOCKER_REGISTRY_SERVER_URL: https://ghcr.io
+  AZURE_WEBAPP_NAME: EcoTracker  # seu Web App Linux
+  DOCKER_REGISTRY_SERVER_URL: ghcr.io
   DOCKER_REGISTRY_SERVER_USERNAME: ${{ github.actor }}
   DOCKER_REGISTRY_SERVER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
+          tags: ${{ env.DOCKER_REGISTRY_SERVER_URL }}/${{ env.REPO }}:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
