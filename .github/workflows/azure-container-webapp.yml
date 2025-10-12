@@ -51,10 +51,8 @@ jobs:
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
       - name: Deploy to Azure Web App (Linux)
-        uses: azure/webapps-container-deploy@v1
+        uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           images: ${{ env.DOCKER_REGISTRY_SERVER_URL }}/${{ env.REPO }}:${{ github.sha }}
-          registry-url: ${{ env.DOCKER_REGISTRY_SERVER_URL }}
-          registry-username: ${{ env.DOCKER_REGISTRY_SERVER_USERNAME }}
-          registry-password: ${{ env.DOCKER_REGISTRY_SERVER_PASSWORD }}
+          slot-name: Production
