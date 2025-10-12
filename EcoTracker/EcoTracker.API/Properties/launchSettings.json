@@ -31,7 +31,7 @@
     "Container (Dockerfile)": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/documentation",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Staging"
       },

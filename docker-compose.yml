@@ -1,0 +1,18 @@
+services:
+  staging:
+    build:
+      context: ./EcoTracker
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Staging
+
+  production:
+    build:
+      context: ./EcoTracker
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
