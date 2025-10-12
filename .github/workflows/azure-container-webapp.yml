@@ -39,7 +39,7 @@ jobs:
         with:
           context: ./EcoTracker
           push: true
-          tags: ${{ env.DOCKER_REGISTRY_SERVER_URL }}/${{ env.REPO }}:${{ github.sha }}
+          tags: ${{ env.DOCKER_REGISTRY_SERVER_URL }}/${{ env.REPO }}:latest
           file: ./Dockerfile
 
   deploy:
