@@ -51,7 +51,7 @@ jobs:
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
       - name: Deploy to Azure Web App (Linux)
-        uses: azure/webapps-container-deploy@v2
+        uses: azure/webapps-container-deploy@v1
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           images: ${{ env.DOCKER_REGISTRY_SERVER_URL }}/${{ env.REPO }}:${{ github.sha }}
