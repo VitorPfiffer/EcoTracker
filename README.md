@@ -58,7 +58,7 @@ O Deploy é considerado concluído assim que a imagem é publicada no Registry, 
 1.  **Deploy para Staging:**
     * **Ambiente:** `ecotracker-staging` (Azure Web App)
     * **Imagem:** Usa a tag **`:staging`**.
-    * **Link:** [ecotracker-staging-hcbmfqhafwgfdzd8.brazilsouth-01.azurewebsites.net/api/documentation](ecotracker-staging-hcbmfqhafwgfdzd8.brazilsouth-01.azurewebsites.net/api/documentation)
+    * **Link:** <ecotracker-staging-hcbmfqhafwgfdzd8.brazilsouth-01.azurewebsites.net/api/documentation>
 
 2.  **Deploy para Production:**
     * **Ambiente:** `ecotracker-prod` (Azure Web App)
