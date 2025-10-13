@@ -1,4 +1,4 @@
-name: Homolog - Deploy Azure Web App
+name: Staging - Deploy Azure Web App
 
 env:
   AZURE_WEBAPP_NAME: EcoTracker # seu Web App Linux
@@ -8,9 +8,9 @@ env:
 
 on:
   push:
-    branches: ["homolog"]
+    branches: ["staging"]
   pull_request:
-    branches: ["homolog"]
+    branches: ["staging"]
   workflow_dispatch:
 
 permissions:
@@ -41,5 +41,5 @@ jobs:
         with:
           context: ./EcoTracker
           push: true
-          tags: ${{ env.DOCKER_REGISTRY_SERVER_URL }}/${{ env.REPO }}:homolog
+          tags: ${{ env.DOCKER_REGISTRY_SERVER_URL }}/${{ env.REPO }}:staging
           file: ./Dockerfile
