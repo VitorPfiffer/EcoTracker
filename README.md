@@ -1,89 +1,90 @@
-# Projeto - EcoTracker
+# EcoTracker - Sistema de Monitoramento
 
-## Como executar localmente com Docker
+O **EcoTracker** é uma aplicação desenvolvida em **.NET 8** para monitoramento. Este guia detalha a arquitetura utilizada e como executar a aplicação em ambientes local e de nuvem.
 
-Para rodar a aplicação EcoTracker localmente utilizando Docker, siga os passos abaixo:
+---
 
-1. Suba todos os Containers utilizando Docker Compose
-```bash
-docker-compose up --build
-```
+## Execução Local com Docker
 
-isso vai subir os containers de production e staging
+A aplicação é containerizada e orquestrada via **Docker Compose**, permitindo a execução rápida e isolada.
 
-acesse os respectivos aplicacoes
+### Estratégias de Containerização
 
-"8080:80/api/documentation para staging 
-"8080:81"/api/documentation para production
+* **Configuração de Ambiente:** Utiliza a variável `ASPNET_ENVIRONMENT` para gerenciar diferentes configurações da aplicação.
+* **Orquestração:** O Docker Compose permite subir os serviços individualmente ou em conjunto.
 
-para subir cada um inidvidualmente basta
-```bash
-docker-compose up --build staging
+### 1. Comandos de Execução
 
-docker-compose up --build production
-```
+Você pode subir os ambientes de *Staging* e *Production* simultaneamente ou individualmente:
 
-Pipeline CI/CD
+| Objetivo | Comando |
+| :--- | :--- |
+| **Subir Todos os Containers** | `docker-compose up --build` |
+| **Subir Apenas Staging** | `docker-compose up --build staging` |
+| **Subir Apenas Production** | `docker-compose up --build production` |
 
-O pipeline de CI/CD foi configurado utilizando GitHub Actions, contemplando os ambientes staging (homolog) e production:
+### 2. Acesso à Documentação Local (Swagger)
 
-CI (Build e Testes)
+Após a execução, acesse o **Swagger** para testar a API:
 
-Executa a cada push para as branches staging e main.
+| Ambiente | Endereço (Local) |
+| :--- | :--- |
+| **Staging** | `http://localhost:8080/api/documentation` |
+| **Production** | `http://localhost:8081/api/documentation` |
 
-Etapas:
+---
 
-Restaurar pacotes .NET
+## Pipeline CI/CD (GitHub Actions)
 
-Build da aplicação
+O pipeline foi configurado com **GitHub Actions** para automatizar o processo de Integração e Entrega Contínua nos ambientes *Staging* e *Production*.
 
-Execução de testes automatizados (dotnet test)
+### CI (Integração Contínua: Build e Testes)
 
-Build e push da imagem Docker para o GitHub Container Registry (GHCR)
+É executado a cada `push` para as branches **`staging`** e **`main`**.
 
-CD (Deploy)
+**Etapas:**
 
-Executa após a pipeline de CI.
+1.  **Restaurar Pacotes:** Restauração de dependências do .NET.
+2.  **Build da Aplicação:** Compilação do projeto.
+3.  **Execução de Testes:** Execução dos testes automatizados (`dotnet test`).
+4.  **Build & Push da Imagem:** Criação e envio da imagem Docker para o **GitHub Container Registry (GHCR)**.
 
-Etapas:
+### CD (Entrega Contínua: Deploy)
 
-Deploy automático para o Web App de staging (ecotracker-staging) usando a imagem gerada :staging
+É executado automaticamente após a conclusão do pipeline de CI.
 
-Deploy automático para produção (ecotracker-prod) usando a imagem respectiva :latest
+**Etapas:**
 
-Containerização
+1.  **Deploy para Staging:**
+    * **Ambiente:** `ecotracker-staging` (Azure Web App)
+    * **Imagem:** Usa a tag **`:staging`**.
+    * **Link:** [ecotracker-staging](ecotracker-staging-hcbmfqhafwgfdzd8.brazilsouth-01.azurewebsites.net/api/documentation)
 
-A aplicação é containerizada usando Docker.
+2.  **Deploy para Production:**
+    * **Ambiente:** `ecotracker-prod` (Azure Web App)
+    * **Imagem:** Usa a tag **`:latest`**.
+    * **Link:** [ecotracker-production](ecotracker.azurewebsites.net/api/documentation)
 
-Estratégias adotadas:
+---
 
-Configuração de variáveis de ambiente via ASPNET_ENVIROMENT
+## Evidências do Projeto
 
-Orquestração da aplicação e banco de dados pelo Docker Compose
-
-Possibilidade de subir serviços individualmente ou em conjunto
-
-![Evidencia Docker Compose](https://i.imgur.com/wB8aMOD.png)
-![Evidencia Github Actions](https://i.imgur.com/CxQnuiU.png)
-
-link para o deploy em Staging: [ecotracker-staging](ecotracker-staging-hcbmfqhafwgfdzd8.brazilsouth-01.azurewebsites.net/api/documentation)
-
-link para deploy em Production: [ecotracker-production](ecotracker.azurewebsites.net/api/documentation)
-
-Tecnologias utilizadas
-
-Linguagem/Framework: .NET 8, C#, Entity Framework
-
-Banco de dados: Oracle (remoto)
-
-Containerização: Docker, Docker Compose
-
-CI/CD: GitHub Actions
-
-Deploy: Azure Web App (staging e production)
-
-Controle de versão: Git / GitHub
+| Descrição | Imagem |
+| :--- | :--- |
+| **Docker Compose em Execução** | ![Evidencia Docker Compose](https://i.imgur.com/wB8aMOD.png) |
+| **Pipeline GitHub Actions** | ![Evidencia Github Actions](https://i.imgur.com/CxQnuiU.png) |
 
 
+---
 
+## Tecnologias Utilizadas
 
+| Categoria | Tecnologia | Detalhes |
+| :--- | :--- | :--- |
+| **Linguagem/Framework** | **.NET 8, C#** | Utiliza **Entity Framework**. |
+| **Banco de Dados** | **Oracle** | Banco de dados **remoto**. |
+| **Containerização** | **Docker, Docker Compose** | Contêineres para a aplicação. |
+| **CI/CD** | **GitHub Actions** | Automação dos pipelines. |
+| **Container Registry** | **GitHub Container Registry (GHCR)** | Repositório das imagens Docker. |
+| **Deploy** | **Azure Web App** | Ambientes de **Staging** e **Production**. |
+| **Controle de Versão** | **Git / GitHub** | |
