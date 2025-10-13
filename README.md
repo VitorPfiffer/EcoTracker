@@ -52,7 +52,7 @@ O pipeline foi configurado com **GitHub Actions** para automatizar o processo de
 ### CD (Entrega Contínua: Deploy)
 
 É executado automaticamente após a conclusão do pipeline de CI.
-
+O Deploy é considerado concluído assim que a imagem é publicada no Registry, pois o Azure Web App está configurado para automaticamente buscar e atualizar a aplicação a partir dessa nova tag.
 **Etapas:**
 
 1.  **Deploy para Staging:**
