@@ -63,8 +63,8 @@ Orquestração da aplicação e banco de dados pelo Docker Compose
 
 Possibilidade de subir serviços individualmente ou em conjunto
 
-![Evidencia Docker Compose](https://imgur.com/a/D1dEs2p.png)
-![Evidencia Github Actions](https://i.imgur.com/wB8aMOD.png)
+![Evidencia Docker Compose](https://i.imgur.com/wB8aMOD.png)
+![Evidencia Github Actions](https://i.imgur.com/CxQnuiU.png)
 
 link para o deploy em Staging: [ecotracker-staging](ecotracker-staging-hcbmfqhafwgfdzd8.brazilsouth-01.azurewebsites.net/api/documentation)
 
