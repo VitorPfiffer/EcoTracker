@@ -1,4 +1,4 @@
-name: Build and deploy a container to an Azure Web App
+name: Homolog - Deploy Azure Web App
 
 env:
   AZURE_WEBAPP_NAME: EcoTracker # seu Web App Linux
