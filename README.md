@@ -1,4 +1,4 @@
-# EcoTracker - Sistema de Monitoramento
+# EcoTracker
 
 O **EcoTracker** é uma aplicação desenvolvida em **.NET 8** para monitoramento. Este guia detalha a arquitetura utilizada e como executar a aplicação em ambientes local e de nuvem.
 
