@@ -7,6 +7,7 @@ Para rodar a aplicação EcoTracker localmente utilizando Docker, siga os passos
 1. Suba todos os Containers utilizando Docker Compose
 ```bash
 docker-compose up --build
+```
 
 isso vai subir os containers de production e staging
 
@@ -16,8 +17,11 @@ acesse os respectivos aplicacoes
 "8080:81"/api/documentation para production
 
 para subir cada um inidvidualmente basta
-docker-compose up --build staging ou production
+```bash
+docker-compose up --build staging
 
+docker-compose up --build production
+```
 
 Pipeline CI/CD
 
@@ -35,7 +39,7 @@ Build da aplicação
 
 Execução de testes automatizados (dotnet test)
 
-Build e push da imagem Docker para o Azure Container Registry (ACR)
+Build e push da imagem Docker para o GitHub Container Registry (GHCR)
 
 CD (Deploy)
 
@@ -61,13 +65,14 @@ Possibilidade de subir serviços individualmente ou em conjunto
 
 ![Evidencia Docker Compose](https://imgur.com/a/D1dEs2p)
 ![Evidencia Github Actions](https://imgur.com/a/Z7vKLLh)
-link para o deploy em Staging (ecotracker-staging-hcbmfqhafwgfdzd8.brazilsouth-01.azurewebsites.net/api/documentation)
 
-link para deploy em Production (ecotracker.azurewebsites.net/api/documentation)
+link para o deploy em Staging: [ecotracker-staging](ecotracker-staging-hcbmfqhafwgfdzd8.brazilsouth-01.azurewebsites.net/api/documentation)
+
+link para deploy em Production: [ecotracker-production](ecotracker.azurewebsites.net/api/documentation)
 
 Tecnologias utilizadas
 
-Linguagem/Framework: .NET 8, C#
+Linguagem/Framework: .NET 8, C#, Entity Framework
 
 Banco de dados: Oracle (remoto)
 
