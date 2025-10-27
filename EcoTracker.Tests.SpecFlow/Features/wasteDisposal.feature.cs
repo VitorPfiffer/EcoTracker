@@ -203,12 +203,12 @@ namespace EcoTracker.Tests.SpecFlow.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Atualizar WasteDisposal com sucesso")]
-        public void AtualizarWasteDisposalComSucesso()
+        [NUnit.Framework.DescriptionAttribute("Atualizar WasteDisposal")]
+        public void AtualizarWasteDisposal()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Atualizar WasteDisposal com sucesso", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Atualizar WasteDisposal", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 42
   this.ScenarioInitialize(scenarioInfo);
 #line hidden
