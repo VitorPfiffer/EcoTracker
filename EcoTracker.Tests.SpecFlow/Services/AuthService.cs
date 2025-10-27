@@ -33,14 +33,14 @@ namespace EcoTracker.Tests.SpecFlow.Services
 
             // Envia requisição de login
             var response = await _httpClient.PostAsync(
-                "https://localhost:8081/api/login",
+                "http://localhost:8081/api/v1/auth/login",
                 new StringContent(json, Encoding.UTF8, "application/json")
             );
 
             response.EnsureSuccessStatusCode();
 
             var resultJson = await response.Content.ReadAsStringAsync();
-            var token = JsonConvert.DeserializeObject<dynamic>(resultJson).token;
+            var token = JsonConvert.DeserializeObject<dynamic>(resultJson).data;
 
             return token;
         }

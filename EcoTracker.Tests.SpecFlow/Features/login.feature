@@ -7,20 +7,20 @@ Funcionalidade: Login de usuário
   Cenário: Login bem-sucedido
     Dado que eu informei o email "admin@gmail.com"
     E a senha "admin123"
-    Quando eu envio a requisição para "api/v1/auth/login"
+    Quando eu estou autenticado em "api/v1/auth/login"
     Então devo receber o status code 201
     E o token de autenticação deve ser retornado
 
   Cenário: Login com credenciais inválidas
     Dado que eu informei o email "admin"
     E a senha "senha_errada"
-    Quando eu envio a requisição para "api/v1/auth/login"
+    Quando eu estou autenticado em "api/v1/auth/login"
     Então devo receber o status code 400
     E o erro deve ser retornado
 
   Cenário: Login com campos em branco
     Dado que eu informei o email ""
     E a senha ""
-    Quando eu envio a requisição para "api/v1/auth/login"
+    Quando eu estou autenticado em "api/v1/auth/login"
     Então devo receber o status code 400
     E o erro deve ser retornado

@@ -6,30 +6,33 @@ namespace MyApp.Tests.SpecFlow.Steps
 {
 
     [Binding]
-    public class LoginBemSucedidoSteps
+    public class LoginSteps
     {
+        private readonly ScenarioContext _scenarioContext;
+        public LoginSteps(ScenarioContext scenarioContext)
+        {
+            _scenarioContext = scenarioContext;
+        }
+
         private readonly HttpClient _httpClient = new HttpClient();
         private HttpResponseMessage _response;
-        private string _token;
-        private string _email;
-        private string _senha;
 
         [Given(@"que eu informei o email ""(.*)""")]
         public void DadoQueEuInformeiOEmail(string email)
         {
-            _email = email;
+            _scenarioContext["email"] = email;
         }
 
         [Given(@"a senha ""(.*)""")]
         public void DadoASenha(string senha)
         {
-            _senha = senha;
+            _scenarioContext["senha"] = senha;
         }
 
-        [When(@"eu envio a requisição para ""(.*)""")]
+        [When(@"eu estou autenticado em ""(.*)""")]
         public async Task QuandoEuEnvioARequisicaoPara(string endpoint)
         {
-            var payload = new { email = _email, password = _senha };
+            var payload = new { email = _scenarioContext["email"] as string, password = _scenarioContext["senha"] as string };
             string json = JsonConvert.SerializeObject(payload);
 
             string url = $"http://localhost:8081/{endpoint}";
@@ -42,28 +45,34 @@ namespace MyApp.Tests.SpecFlow.Steps
             if (_response.IsSuccessStatusCode)
             {
                 var content = await _response.Content.ReadAsStringAsync();
-                _token = JsonConvert.DeserializeObject<dynamic>(content).data;
+                _scenarioContext["token"] = JsonConvert.DeserializeObject<dynamic>(content).data.ToString();
             }
+
+            _scenarioContext["response"] = _response;
         }
 
         [Then(@"devo receber o status code (.*)")]
         public void EntaoDevoReceberOStatusCode(int expectedStatusCode)
         {
-            Assert.AreEqual(expectedStatusCode, (int)_response.StatusCode);
+            var response = _scenarioContext["response"] as HttpResponseMessage;
+            Assert.AreEqual(expectedStatusCode, (int)response.StatusCode);
         }
 
         [Then(@"o token de autenticação deve ser retornado")]
         public void EntaoOTokenDeAutenticacaoDeveSerRetornado()
         {
-            Assert.False(string.IsNullOrEmpty(_token), "Token não foi retornado.");
+            var token = _scenarioContext["token"] as string;
+            Assert.False(string.IsNullOrEmpty(token), "Token não foi retornado.");
         }
 
 
         [Then(@"o erro deve ser retornado")]
         public async Task EntaoOErroDeveSerRetornado()
         {
-            var content = await _response.Content.ReadAsStringAsync();
-            dynamic json = JsonConvert.DeserializeObject<dynamic>(content);
+
+            var content = _scenarioContext["response"] as HttpResponseMessage;
+            var content1 = await _response.Content.ReadAsStringAsync();
+            dynamic json = JsonConvert.DeserializeObject<dynamic>(content1);
 
             Assert.True(json.errors != null && json.errors.Count > 0, "O array 'errors' está vazio ou não existe.");
             Assert.False((bool)json.success, "O campo 'success' deveria ser false.");

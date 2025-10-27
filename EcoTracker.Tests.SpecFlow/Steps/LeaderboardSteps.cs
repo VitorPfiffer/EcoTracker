@@ -1,50 +1,97 @@
-﻿//using EcoTracker.Tests.SpecFlow.Services;
-//using EcoTracker.Tests.SpecFlow.Validators;
-//using TechTalk.SpecFlow;
+﻿using EcoTracker.Tests.SpecFlow.Validators;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using TechTalk.SpecFlow;
 
-//[Binding]
-//public class LeaderboardSteps
-//{
-//    private readonly HttpClient _httpClient = new HttpClient();
-//    private readonly AuthService _authService;
-//    private HttpResponseMessage _response;
-//    private string _apiResponse;
+[Binding]
+public class LeaderboardSteps
+{
+    private readonly HttpClient _httpClient = new HttpClient();
 
-//    private string _token;
+    private readonly ScenarioContext _scenarioContext;
+    public LeaderboardSteps(ScenarioContext scenarioContext)
+    {
+        _scenarioContext = scenarioContext;
+    }
 
-//    private readonly JsonSchemaValidator _validator = new JsonSchemaValidator();
 
-//    public LeaderboardSteps()
-//    {
-//        _authService = new AuthService(_httpClient);
-//    }
 
-//    [Given(@"que eu tenha os seguintes dados de login:")]
-//    public async Task DadoQueEuTenhaOsSeguintesDadosDeLogin(Table table)
-//    {
-//        _token = await _authService.LoginAsync(table);
-//    }
+    private HttpResponseMessage _response;
+    private string _apiResponse;
 
-//    [When(@"eu envio a requisição para o endpoint ""(.*)""")]
-//    public async Task QuandoEuEnvioARequisicaoParaOEndpoint(string endpoint)
-//    {
-//        _httpClient.DefaultRequestHeaders.Clear();
-//        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_token}");
+    private readonly JsonSchemaValidator _validator = new JsonSchemaValidator();
 
-//        _response = await _httpClient.GetAsync($"https://localhost:8081{endpoint}");
-//        _apiResponse = await _response.Content.ReadAsStringAsync();
-//    }
 
-//    [Then(@"devo receber o status code 200")]
-//    public void EntaoDevoReceberOStatusCode200()
-//    {
-//        Assert.Equals(System.Net.HttpStatusCode.OK, _response.StatusCode);
-//    }
+    [When(@"eu envio a requisição para o endpoint ""(.*)""")]
+    public async Task QuandoEuEnvioARequisicaoParaOEndpoint(string endpoint)
+    {
+        string token = _scenarioContext["token"] as string;
+        _httpClient.DefaultRequestHeaders.Clear();
+        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
-//    [Then(@"a resposta deve seguir esse schema ""(.*)""")]
-//    public async Task EntaoARespostaDeveSeguirEsseSchema(string schemaPath)
-//    {
-//        bool isValid = await _validator.ValidateAsync(schemaPath, _apiResponse);
-//        Assert.True(isValid, "O JSON retornado não está de acordo com o schema.");
-//    }
-//}
+        var _response = await _httpClient.GetAsync($"http://localhost:8081/{endpoint}");
+        _scenarioContext["response"] = _response;
+        _scenarioContext["apiResponse"] = await _response.Content.ReadAsStringAsync();
+    }
+
+    [Then(@"a resposta deve seguir esse schema ""(.*)""")]
+    public async Task EntaoARespostaDeveSeguirEsseSchema(string schemaPath)
+    {
+
+        var apiResponse = _scenarioContext["apiResponse"] as string;
+        bool isValid = await _validator.ValidateAsync(schemaPath, apiResponse);
+        Assert.True(isValid, "O JSON retornado não está de acordo com o schema.");
+    }
+
+    [Then(@"a resposta JSON deve conter os campos obrigatórios")]
+    public void ValidarCamposObrigatorios(Table table)
+    {
+        string responseContent = _scenarioContext["ApiResponse"] as string;
+        dynamic json = JsonConvert.DeserializeObject<dynamic>(responseContent);
+
+        foreach (var row in table.Rows)
+        {
+            string campo = row["campo"];
+            string tipoEsperado = row["tipo"];
+
+            // Verifica se o campo existe
+            Assert.True(json[campo] != null, $"O campo '{campo}' não existe na resposta.");
+
+            // Verifica o tipo esperado
+            switch (tipoEsperado.ToLower())
+            {
+                case "string":
+                    Assert.IsInstanceOf<string>((string)json[campo]);
+                    break;
+                case "boolean":
+                    Assert.IsInstanceOf<bool>((bool)json[campo]);
+                    break;
+                case "integer":
+                case "int":
+                    Assert.IsInstanceOf<int>((int)json[campo]);
+                    break;
+                case "array":
+                    Assert.IsInstanceOf<JArray>(json[campo]);
+                    break;
+                case "object":
+                    Assert.IsInstanceOf<JObject>(json[campo]);
+                    break;
+            }
+        }
+    }
+    [Then(@"os valores esperados da resposta JSON devem ser")]
+    public void ValidarValoresEsperados(Table table)
+    {
+        string responseContent = _scenarioContext["apiResponse"] as string;
+        dynamic json = JsonConvert.DeserializeObject<dynamic>(responseContent);
+
+        foreach (var row in table.Rows)
+        {
+            string campo = row["campo"];
+            string valorEsperado = row["valor"];
+
+            string valorReal = json[campo]?.ToString();
+            Assert.AreEqual(valorEsperado, valorReal, $"Campo '{campo}' não tem o valor esperado.");
+        }
+    }
+}

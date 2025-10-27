@@ -98,7 +98,7 @@ namespace EcoTracker.Tests.SpecFlow.Features
     testRunner.And("a senha \"admin123\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 10
-    testRunner.When("eu envio a requisição para \"api/v1/auth/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+    testRunner.When("eu estou autenticado em \"api/v1/auth/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 11
     testRunner.Then("devo receber o status code 201", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -134,7 +134,7 @@ namespace EcoTracker.Tests.SpecFlow.Features
     testRunner.And("a senha \"senha_errada\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 17
-    testRunner.When("eu envio a requisição para \"api/v1/auth/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+    testRunner.When("eu estou autenticado em \"api/v1/auth/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 18
     testRunner.Then("devo receber o status code 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -170,7 +170,7 @@ namespace EcoTracker.Tests.SpecFlow.Features
     testRunner.And("a senha \"\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 24
-    testRunner.When("eu envio a requisição para \"api/v1/auth/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+    testRunner.When("eu estou autenticado em \"api/v1/auth/login\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 25
     testRunner.Then("devo receber o status code 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");

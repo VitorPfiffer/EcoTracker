@@ -8,11 +8,12 @@ namespace EcoTracker.Tests.SpecFlow.Validators
     {
         public async Task<bool> ValidateAsync(string jsonSchemaPath, string apiResponse)
         {
-            if (!File.Exists(jsonSchemaPath))
-                throw new FileNotFoundException($"Schema file not found at path: {jsonSchemaPath}");
+            string schemaPath = Path.Combine(AppContext.BaseDirectory, jsonSchemaPath.Replace('/', Path.DirectorySeparatorChar));
+            if (!File.Exists(schemaPath))
+                throw new FileNotFoundException($"Schema file not found at path: {schemaPath}");
 
             // Ler o schema do arquivo
-            string schemaJson = await File.ReadAllTextAsync(jsonSchemaPath);
+            string schemaJson = await File.ReadAllTextAsync(schemaPath);
             JSchema schema = JSchema.Parse(schemaJson);
 
             // Ler o JSON da resposta

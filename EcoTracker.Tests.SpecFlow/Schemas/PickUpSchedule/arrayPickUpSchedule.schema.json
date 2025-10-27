@@ -1,0 +1,148 @@
+﻿{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1761576841.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "success",
+    "data",
+    "date"
+  ],
+  "properties": {
+    "success": {
+      "$id": "#root/success",
+      "title": "Success",
+      "type": "boolean",
+      "examples": [
+        true
+      ],
+      "default": true
+    },
+    "data": {
+      "$id": "#root/data",
+      "title": "Data",
+      "type": "array",
+      "default": [],
+      "items": {
+        "$id": "#root/data/items",
+        "title": "Items",
+        "type": "object",
+        "required": [
+          "id",
+          "street",
+          "number",
+          "neighborhood",
+          "city",
+          "state",
+          "postalCode",
+          "wasteType",
+          "scheduledDate"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#root/data/items/id",
+            "title": "Id",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "4279a3df-e838-4338-9414-813cab9a9e5f"
+            ],
+            "pattern": "^.*$"
+          },
+          "street": {
+            "$id": "#root/data/items/street",
+            "title": "Street",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "Rua Exemplo"
+            ],
+            "pattern": "^.*$"
+          },
+          "number": {
+            "$id": "#root/data/items/number",
+            "title": "Number",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "123"
+            ],
+            "pattern": "^.*$"
+          },
+          "neighborhood": {
+            "$id": "#root/data/items/neighborhood",
+            "title": "Neighborhood",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "Bairro Exemplo"
+            ],
+            "pattern": "^.*$"
+          },
+          "city": {
+            "$id": "#root/data/items/city",
+            "title": "City",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "Cidade Exemplo"
+            ],
+            "pattern": "^.*$"
+          },
+          "state": {
+            "$id": "#root/data/items/state",
+            "title": "State",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "SC"
+            ],
+            "pattern": "^.*$"
+          },
+          "postalCode": {
+            "$id": "#root/data/items/postalCode",
+            "title": "Postalcode",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "12345-678"
+            ],
+            "pattern": "^.*$"
+          },
+          "wasteType": {
+            "$id": "#root/data/items/wasteType",
+            "title": "Wastetype",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "organico"
+            ],
+            "pattern": "^.*$"
+          },
+          "scheduledDate": {
+            "$id": "#root/data/items/scheduledDate",
+            "title": "Scheduleddate",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "2025-10-12T14:30:00"
+            ],
+            "pattern": "^.*$"
+          }
+        }
+      }
+
+    },
+    "date": {
+      "$id": "#root/date",
+      "title": "Date",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "2025-10-27T14:53:52.4291182Z"
+      ],
+      "pattern": "^.*$"
+    }
+  }
+}

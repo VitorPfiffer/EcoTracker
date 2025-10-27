@@ -1,0 +1,83 @@
+﻿{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1761574718.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "success",
+    "data",
+    "date"
+  ],
+  "properties": {
+    "success": {
+      "$id": "#root/success",
+      "title": "Success",
+      "type": "boolean",
+      "examples": [
+        true
+      ],
+      "default": true
+    },
+    "data": {
+      "$id": "#root/data",
+      "title": "Data",
+      "type": "object",
+      "required": [
+        "totalDiscardKg",
+        "userCount",
+        "mostDiscardedType",
+        "averageDiscardPerUser"
+      ],
+      "properties": {
+        "totalDiscardKg": {
+          "$id": "#root/data/totalDiscardKg",
+          "title": "Totaldiscardkg",
+          "type": "integer",
+          "examples": [
+            58
+          ],
+          "default": 0
+        },
+        "userCount": {
+          "$id": "#root/data/userCount",
+          "title": "Usercount",
+          "type": "integer",
+          "examples": [
+            1
+          ],
+          "default": 0
+        },
+        "mostDiscardedType": {
+          "$id": "#root/data/mostDiscardedType",
+          "title": "Mostdiscardedtype",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "organico"
+          ],
+          "pattern": "^.*$"
+        },
+        "averageDiscardPerUser": {
+          "$id": "#root/data/averageDiscardPerUser",
+          "title": "Averagediscardperuser",
+          "type": "integer",
+          "examples": [
+            58
+          ],
+          "default": 0
+        }
+      }
+    },
+    "date": {
+      "$id": "#root/date",
+      "title": "Date",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "2025-10-27T14:18:30.084969Z"
+      ],
+      "pattern": "^.*$"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+﻿{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1761578165.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "success",
+    "data",
+    "date"
+  ],
+  "properties": {
+    "success": {
+      "$id": "#root/success",
+      "title": "Success",
+      "type": "boolean",
+      "examples": [
+        true
+      ],
+      "default": true
+    },
+    "data": {
+      "$id": "#root/data",
+      "title": "Data",
+      "type": "array",
+      "default": [],
+      "items": {
+        "$id": "#root/data/items",
+        "title": "Items",
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "username",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#root/data/items/id",
+            "title": "Id",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "01e7bcea-fedf-4e8b-88a3-19a29c9fea49"
+            ],
+            "pattern": "^.*$"
+          },
+          "email": {
+            "$id": "#root/data/items/email",
+            "title": "Email",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "vitão@gmail.com"
+            ],
+            "pattern": "^.*$"
+          },
+          "username": {
+            "$id": "#root/data/items/username",
+            "title": "Username",
+            "type": "string",
+            "default": "",
+            "examples": [
+              "vitão"
+            ],
+            "pattern": "^.*$"
+          },
+          "role": {
+            "$id": "#root/data/items/role",
+            "title": "Role",
+            "type": "integer",
+            "examples": [
+              0
+            ],
+            "default": 0
+          }
+        }
+      }
+
+    },
+    "date": {
+      "$id": "#root/date",
+      "title": "Date",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "2025-10-27T15:12:22.8983175Z"
+      ],
+      "pattern": "^.*$"
+    }
+  }
+}
