@@ -200,12 +200,12 @@ namespace EcoTracker.Tests.SpecFlow.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Atualizar User com sucesso")]
-        public void AtualizarUserComSucesso()
+        [NUnit.Framework.DescriptionAttribute("Atualizar User")]
+        public void AtualizarUser()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Atualizar User com sucesso", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Atualizar User", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 41
   this.ScenarioInitialize(scenarioInfo);
 #line hidden

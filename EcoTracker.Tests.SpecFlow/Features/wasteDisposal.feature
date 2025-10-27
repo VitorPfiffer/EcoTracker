@@ -39,7 +39,7 @@ Funcionalidade: Gerenciamento de WasteDisposal
       | campo   | valor |
       | success | True  |
 
-  Cenário: Atualizar WasteDisposal com sucesso
+  Cenário: Atualizar WasteDisposal
     Dado que eu informei o email "admin@gmail.com"
     E a senha "admin123"
     Quando eu estou autenticado em "api/v1/auth/login"

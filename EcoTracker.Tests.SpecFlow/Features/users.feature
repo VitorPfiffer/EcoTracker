@@ -38,7 +38,7 @@ Funcionalidade: Gerenciamento de Users
       | campo   | valor |
       | success | False |
 
-  Cenário: Atualizar User com sucesso
+  Cenário: Atualizar User
     Dado que eu informei o email "admin@gmail.com"
     E a senha "admin123"
     Quando eu estou autenticado em "api/v1/auth/login"
