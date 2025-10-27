@@ -15,7 +15,6 @@ namespace EcoTracker.Application.Services
     public class AuthAppService : ApplicationService, IAuthAppService
     {
         private readonly IConfiguration _configuration;
-
         private readonly IUserDomainService _userDomainService;
 
         public AuthAppService(INotificationManager notificationManager, IMapper mapper, IConfiguration configuration, IUserDomainService userDomainService) : base(notificationManager, mapper)
@@ -47,7 +46,10 @@ namespace EcoTracker.Application.Services
             var user = await _userDomainService.GetByEmailAsync(email);
 
             if (user == null || user?.Password != password)
+            {
+                NotifyError("invalid_credentials");
                 return string.Empty;
+            }
 
             return this.GenerateToken(user);
         }

@@ -1,0 +1,29 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "success": { "type": "boolean" },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "userId": { "type": "string" },
+          "username": { "type": "string" },
+          "totalWasteRecycled": { "type": "integer" },
+          "unit": { "type": "string" },
+          "wasteTypes": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": [ "userId", "username", "totalWasteRecycled", "unit", "wasteTypes" ]
+      }
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [ "success", "data", "date" ]
+}
