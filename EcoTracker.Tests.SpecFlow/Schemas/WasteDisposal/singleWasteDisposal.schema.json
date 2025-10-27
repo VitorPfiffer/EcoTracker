@@ -1,0 +1,107 @@
+﻿{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/object1761578811.json",
+  "title": "Root",
+  "type": "object",
+  "required": [
+    "success",
+    "data",
+    "date"
+  ],
+  "properties": {
+    "success": {
+      "$id": "#root/success",
+      "title": "Success",
+      "type": "boolean",
+      "examples": [
+        true
+      ],
+      "default": true
+    },
+    "data": {
+      "$id": "#root/data",
+      "title": "Data",
+      "type": "object",
+      "required": [
+        "id",
+        "wasteType",
+        "quantity",
+        "unit",
+        "date",
+        "userId"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#root/data/id",
+          "title": "Id",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "a8aeb6ec-4ebd-4726-9fac-dd8560e10764"
+          ],
+          "pattern": "^.*$"
+        },
+        "wasteType": {
+          "$id": "#root/data/wasteType",
+          "title": "Wastetype",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "organico"
+          ],
+          "pattern": "^.*$"
+        },
+        "quantity": {
+          "$id": "#root/data/quantity",
+          "title": "Quantity",
+          "type": "integer",
+          "examples": [
+            3
+          ],
+          "default": 0
+        },
+        "unit": {
+          "$id": "#root/data/unit",
+          "title": "Unit",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "kg"
+          ],
+          "pattern": "^.*$"
+        },
+        "date": {
+          "$id": "#root/data/date",
+          "title": "Date",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "2025-05-12T14:30:00"
+          ],
+          "pattern": "^.*$"
+        },
+        "userId": {
+          "$id": "#root/data/userId",
+          "title": "Userid",
+          "type": "string",
+          "default": "",
+          "examples": [
+            "af507245-61e2-4af6-a617-14dd4b4c10dd"
+          ],
+          "pattern": "^.*$"
+        }
+      }
+    },
+    "date": {
+      "$id": "#root/date",
+      "title": "Date",
+      "type": "string",
+      "default": "",
+      "examples": [
+        "2025-10-27T15:26:45.2838266Z"
+      ],
+      "pattern": "^.*$"
+    }
+  }
+}
